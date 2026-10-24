@@ -93,7 +93,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define DEBUGBREAKPOINT __asm__ ("int $3")
 #endif
 #define	Q_DEBUGBREAKPOINT _Q_DEBUGBREAKPOINT()
+#ifdef _MSC_VER
 #define __attribute__(x) 
+#endif
 #define PACKED_STRUCT
 typedef __int32 int32;
 typedef __int16 int16;

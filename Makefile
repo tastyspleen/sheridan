@@ -31,7 +31,7 @@ STRIP ?= strip
 RM ?= rm -f
 
 # The engine finds the game library through GetGameAPI, which is marked
-# visibility("default") in g_main.c, so everything else can stay hidden.
+# GAME_EXPORT in g_main.c, so everything else can stay hidden.
 # NO_ZLIB: q_shared.h includes zlib.h, but nothing in the mod uses it.
 CFLAGS ?= -O2 -g -fno-strict-aliasing -Wall -Wno-missing-braces
 CFLAGS += -MMD -DNO_ZLIB -DC_ONLY
@@ -55,7 +55,6 @@ ifdef CONFIG_WINDOWS
     CFLAGS += -Wno-unknown-pragmas
     # Don't depend on the MinGW runtime DLLs being installed on the server.
     LDFLAGS += -static-libgcc -Wl,--nxcompat,--dynamicbase
-    DEF := game.def
 else
     CFLAGS += -fPIC -fvisibility=hidden
     LIBS += -lm
@@ -106,9 +105,9 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
 	$(E) [CC] $@
 	$(Q)$(CC) -c $(CFLAGS) -o $@ $<
 
-$(OUTPUT): $(OBJS) $(DEF)
+$(OUTPUT): $(OBJS)
 	$(E) [LD] $@
-	$(Q)$(CC) $(LDFLAGS) -o $@ $(OBJS) $(DEF) $(LIBS)
+	$(Q)$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
 
 clean:
 	$(E) [CLEAN] $(BUILDDIR)

@@ -131,7 +131,14 @@ Returns a pointer to the structure with all entry points
 and global variables
 =================
 */
-game_export_t __attribute__ ((visibility("default"))) *GetGameAPI (game_import_t *import)
+// The only symbol the library exports; the engine looks it up by name.
+#ifdef _WIN32
+#define GAME_EXPORT __declspec(dllexport)
+#else
+#define GAME_EXPORT __attribute__ ((visibility("default")))
+#endif
+
+GAME_EXPORT game_export_t *GetGameAPI (game_import_t *import)
 {
 	gi = *import;
 
