@@ -193,4 +193,4 @@ for 32-bit builds and `mingw-w64` for Windows builds.
 
 Optional features (spawn protection, item spawn tuning and the end-of-map
 summary) can be turned off at compile time by commenting out their `SSP_`
-lines in [ssp_flags.h](ssp_flags.h).
+lines in [src/ssp_flags.h](src/ssp_flags.h).

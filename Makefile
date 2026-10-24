@@ -77,7 +77,8 @@ endif
 BUILDDIR ?= build-$(CPU)
 TARGET ?= game$(CPU).$(EXT)
 
-SRCS := $(wildcard *.c)
+SRCDIR := src
+SRCS := $(notdir $(wildcard $(SRCDIR)/*.c))
 OBJS := $(addprefix $(BUILDDIR)/,$(SRCS:.c=.o))
 OUTPUT := $(BUILDDIR)/$(TARGET)
 
@@ -101,7 +102,7 @@ endif
 $(BUILDDIR):
 	$(Q)mkdir -p $@
 
-$(BUILDDIR)/%.o: %.c | $(BUILDDIR)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.c | $(BUILDDIR)
 	$(E) [CC] $@
 	$(Q)$(CC) -c $(CFLAGS) -o $@ $<
 
