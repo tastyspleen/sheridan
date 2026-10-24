@@ -678,7 +678,7 @@ void Touch_Item (edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf
 // g_utils.c
 //
 qboolean	KillBox (edict_t *ent);
-void	G_ProjectSource (vec3_t point, vec3_t distance, vec3_t forward, vec3_t right, vec3_t result);
+void	G_ProjectSource (vec3_t point, const vec3_t distance, vec3_t forward, vec3_t right, vec3_t result);
 edict_t *G_Find (edict_t *from, int fieldofs, char *match);
 edict_t *findradius (edict_t *from, vec3_t org, float rad);
 edict_t *G_PickTarget (char *targetname);
@@ -711,7 +711,7 @@ extern void		ssp_set_client_spawn_protect_effect (edict_t *ent);
 extern qboolean	ssp_client_is_extreme_spawn_protected (edict_t *ent);
 #endif
 #ifdef SSP_TUNE_SPAWNS
-extern char * ssp_tune_spawn (char * item_classname);
+extern const char * ssp_tune_spawn (const char * item_classname);
 #endif
 
 //

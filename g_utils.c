@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "g_local.h"
 
 
-void G_ProjectSource (vec3_t point, vec3_t distance, vec3_t forward, vec3_t right, vec3_t result)
+void G_ProjectSource (vec3_t point, const vec3_t distance, vec3_t forward, vec3_t right, vec3_t result)
 {
 	result[0] = point[0] + forward[0] * distance[0] + right[0] * distance[1];
 	result[1] = point[1] + forward[1] * distance[0] + right[1] * distance[1];
@@ -656,7 +656,7 @@ qboolean ssp_client_is_extreme_spawn_protected (edict_t *ent)
 
 #ifdef SSP_TUNE_SPAWNS
 
-static char * ssp_remap_spawn (char * item_classname, cvar_t * remap_cvar)
+static const char * ssp_remap_spawn (const char * item_classname, cvar_t * remap_cvar)
 {
 	// HORRID STATIC BUF ALERT!
 	// We depend on the return value from this function being
@@ -708,14 +708,14 @@ static cvar_t **ssp_spawn_remaps[] = {
 	NULL
 };
 
-char * ssp_tune_spawn (char * item_classname)
+const char * ssp_tune_spawn (const char * item_classname)
 {
 	// Handle generic remaps:
 	{
 		cvar_t ***remap_cvar = &ssp_spawn_remaps[0];
 		while (*remap_cvar != NULL)
 		{
-			char *remapping;
+			const char *remapping;
 			if ((remapping = ssp_remap_spawn(item_classname, **remap_cvar)) != NULL)
 				return remapping;
 			++remap_cvar;

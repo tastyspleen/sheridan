@@ -936,14 +936,10 @@ Cmd_Spinkick_f
 */
 void Cmd_Spinkick_f (edict_t *ent)
 {
-	int			index;
-	int			i;
 	vec3_t		start;
 	vec3_t		forward;
 	vec3_t		end;
 	trace_t		tr;
-	gitem_t		*item;
-	edict_t		*drop;
 
 	if (ent->client->pers.spectator)
 		return;
